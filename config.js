@@ -1,3 +1,3 @@
 window.GEMINI_CONFIG = {
-    API_KEY: "AIzaSyCaUU18pRfSwtZ9TNYn2WWZx1VUtUwliQo"
+    API_KEY: "AIzaSyDJ4FrH2m0SLa5ghyVx1Khs_s_XhYMAvig"
 };
