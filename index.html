@@ -21,7 +21,7 @@
             color: #333;
             background-color: #f4f7f6;
             margin: 0;
-            padding: 20px; /* Increased padding for better shadow visibility */
+            padding: 20px;
         }
 
         .container {
@@ -29,7 +29,6 @@
             margin: 0 auto;
             background: #fff;
             padding: 15px;
-            /* Added Border and Black Shadow below */
             border: 2px solid #000000; 
             box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); 
             border-radius: 8px;
@@ -234,12 +233,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Punctuality</td><td>Attendance, timeliness in center meetings and branch reporting</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
-                <tr><td>Transactions Accuracy</td><td>Accuracy in recording payments, savings, and loan entries</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
-                <tr><td>Proper Client Validation</td><td>Completeness and correctness of client verification and documentation</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
-                <tr><td>Target Oriented</td><td>Achievement of weekly targets (collection, savings, outreach, etc.)</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
-                <tr><td>Documentation & Compliance</td><td>Correctness of loan filing, "After Release" procedures, and requirements</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
-                <tr><td>Center Meeting Management</td><td>Organized, timely, and efficient conduct of meetings</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Punctuality</td><td>Attendance, timeliness</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Transactions Accuracy</td><td>Payment/Loan entries</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Proper Client Validation</td><td>Completeness of documentation</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Target Oriented</td><td>Weekly achievement</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Documentation & Compliance</td><td>Filing procedures</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Center Meeting Management</td><td>Efficient conduct</td><td class="rating-center"><select class="calc-group-a"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
                 <tr class="score-row">
                     <td colspan="2" style="text-align: center;">Subtotal Score (Max 30)</td>
                     <td class="rating-center"><span id="subtotal-a">0</span>/30 <span class="pct-display" id="pct-a">(0%)</span></td>
@@ -259,12 +258,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Respect</td><td>Shows respect to clients, co-workers, and leaders</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
-                <tr><td>Grooming & Hygiene</td><td>Maintenance of professional appearance and workplace cleanliness</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
-                <tr><td>Proper Conduct</td><td>Professionalism, adherence to policies and procedures</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
-                <tr><td>Communication Skills</td><td>Clear and effective communication with clients and team</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
-                <tr><td>Integrity & Accountability</td><td>Honesty, transparency, and ownership of tasks</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
-                <tr><td>Client Relationship</td><td>Ability to build trust and rapport with clients</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Respect</td><td>Clients and leaders</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Grooming & Hygiene</td><td>Professional appearance</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Proper Conduct</td><td>Adherence to policies</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Communication Skills</td><td>Clear communication</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Integrity & Accountability</td><td>Honesty and ownership</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
+                <tr><td>Client Relationship</td><td>Rapport building</td><td class="rating-center"><select class="calc-group-b"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td><input type="text"></td></tr>
                 <tr class="score-row">
                     <td colspan="2" style="text-align: center;">Subtotal Score (Max 30)</td>
                     <td class="rating-center"><span id="subtotal-b">0</span>/30 <span class="pct-display" id="pct-b">(0%)</span></td>
@@ -311,6 +310,7 @@
 </div>
 
 <script>
+    // FORM LOGIC
     function syncForm() {
         document.getElementById('displayEmpName').innerText = document.getElementById('empName').value;
         document.getElementById('displayHeadName').innerText = document.getElementById('headName').value;
@@ -361,12 +361,25 @@
         actionFunction();
     }
 
+    // AI LOGIC (FIXED FOR GITHUB)
     async function generateSmartRemarks() {
         const btn = document.querySelector('.btn-generate');
         const originalText = btn.innerText;
-        const RAW_KEY = "AIzaSyDi-VVIcQ3e49VebkdxrvtqNuKgCuE8vYE"; 
-        const API_KEY = RAW_KEY.trim(); 
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
+
+        // SAFE KEY HANDLING: Check browser memory first
+        let API_KEY = sessionStorage.getItem('GEMINI_KEY');
+
+        if (!API_KEY) {
+            API_KEY = prompt("API Key missing or blocked. Please paste your new Gemini API Key here:\n(It will be kept in memory for this session only and NOT saved to code)");
+            if (API_KEY) {
+                sessionStorage.setItem('GEMINI_KEY', API_KEY);
+            } else {
+                return;
+            }
+        }
+
+        // Using the 1.5-flash model (more stable and free)
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
         btn.innerText = "Analyzing...";
         btn.disabled = true;
@@ -374,8 +387,9 @@
         const name = document.getElementById('empName').value;
         const pos = document.getElementById('empPosition').value;
         const total = document.getElementById('overall-score').innerText;
+        const status = document.getElementById('overall-status').innerText;
 
-        const promptText = `Analyze performance: ${name}, ${pos}. Score: ${total}/60. Return ONLY JSON: {"strengths": "1 sentence", "improvements": "1 sentence", "plan": "1 sentence"}`;
+        const promptText = `Employee: ${name}, Position: ${pos}. Final Score: ${total}/60 (${status}). Provide a performance review. Return ONLY JSON: {"strengths": "1 specific sentence", "improvements": "1 specific sentence", "plan": "1 specific sentence"}`;
 
         try {
             const response = await fetch(API_URL, {
@@ -383,13 +397,24 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
             });
+            
             const data = await response.json();
-            if (data.error) throw new Error(data.error.message);
+            
+            if (data.error) {
+                if(data.error.message.includes("API_KEY_INVALID")) {
+                    sessionStorage.removeItem('GEMINI_KEY');
+                    throw new Error("Invalid API Key. Please try again.");
+                }
+                throw new Error(data.error.message);
+            }
+
             let aiText = data.candidates[0].content.parts[0].text.replace(/```json|```/g, "").trim();
             const result = JSON.parse(aiText);
+            
             document.getElementById('box-strengths').value = result.strengths;
             document.getElementById('box-improvements').value = result.improvements;
             document.getElementById('box-plan').value = result.plan;
+
         } catch (error) {
             alert("Error: " + error.message);
         } finally {
