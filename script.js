@@ -51,7 +51,6 @@ function validateAndAction(actionFunction) {
 async function generateSmartRemarks() {
     const btn = document.querySelector('.btn-generate');
     const originalText = btn.innerText;
-    // Note: It's recommended to handle API keys securely on the backend
     const RAW_KEY = "AIzaSyCCeoixOssCd_tAjlwyhQHe-MUqKH6k2iM"; 
     const API_KEY = RAW_KEY.trim(); 
     const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
@@ -107,5 +106,4 @@ function downloadPDF() {
     });
 }
 
-// Add event listeners for rating selects
 document.querySelectorAll('select').forEach(s => s.addEventListener('change', calculateScores));
