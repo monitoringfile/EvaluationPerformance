@@ -2,29 +2,167 @@
     --primary-blue: #2c3e50;
     --light-gray: #f8f9fa;
     --border-color: #dee2e6;
+    --header-bg: #e9ecef;
     --success-green: #27ae60;
+    --pdf-red: #e74c3c;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.1;
+    color: #333;
     background-color: #f4f7f6;
-    padding: 20px;
+    margin: 0;
+    padding: 5px;
 }
 
 .container {
-    max-width: 800px;
-    margin: auto;
-    background: white;
-    padding: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* ... Paste the rest of your CSS styles here ... */
+.header-section {
+    text-align: center;
+    border-bottom: 2px solid var(--primary-blue);
+    margin-bottom: 5px;
+    padding-bottom: 3px;
+}
+
+.header-section h1 {
+    margin: 0;
+    font-size: 14px;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    margin-bottom: 5px;
+    background: var(--light-gray);
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 1px 0;
+}
+
+.info-label {
+    font-weight: bold;
+    width: 90px;
+    color: #555;
+    flex-shrink: 0;
+    font-size: 0.65em;
+}
+
+input[type="text"], input[type="date"], select, textarea {
+    width: 100%;
+    padding: 1px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.65em;
+    color: #333;
+    outline: none;
+}
 
 textarea {
-    width: 100%;
-    margin-top: 5px;
-    border: 1px solid var(--border-color);
-    font-size: 12px;
+    resize: none;
+    background: #fff;
+    border: 1px solid #eee;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 3px;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 2px 4px;
+    border: 1px solid var(--border-color);
+    font-size: 0.6em;
+}
+
+th {
+    background-color: var(--header-bg);
+    color: var(--primary-blue);
+    font-weight: bold;
+}
+
+.section-title {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 2px 6px;
+    font-weight: bold;
+    margin-top: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7em;
+}
+
+.rating-center {
+    text-align: center;
+    font-weight: bold;
+}
+
+.score-row {
+    background-color: #fff3cd !important;
+    font-weight: bold;
+}
+
+.pct-display {
+    font-size: 0.7em;
+    color: #666;
+    margin-left: 3px;
+    font-weight: normal;
+}
+
+.btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-generate, .btn-pdf {
+    color: white;
+    border: none;
+    padding: 2px 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+.btn-generate { background-color: var(--success-green); }
+.btn-pdf { background-color: var(--pdf-red); }
+
+.signature-section {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.sig-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1px;
+    min-height: 12px;
+}
+
+.sig-name { font-weight: bold; text-transform: uppercase; font-size: 0.65em; }
+.sig-date { font-size: 0.55em; }
+.sig-label { font-size: 0.5em; color: #666; text-transform: uppercase; margin-top: 1px; font-weight: bold; }
