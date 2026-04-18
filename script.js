@@ -1,73 +1,90 @@
-/**
- * REFI Microfinance MIS - Automated Evaluation
- * Optimized for Dynamic Model Selection (Gemini or Gemma)
- */
+// --- CONFIGURATION ---
+const CONFIG = {
+    // API KEY: When uploading to GitHub, leave this empty 
+    // and use Google Cloud "Browser Restrictions" for security.
+    API_KEY: "AIzaSyDi-VVIcQ3e49VebkdxrvtqNuKgCuE8vYE", 
+    MODEL_URL: "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
+};
 
-// ... (Keep syncForm, getStatus, calculateScores, and validateAndAction as they were)
+// --- INITIALIZATION ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Auto-calculate when dropdowns change
+    document.querySelectorAll('select').forEach(el => {
+        el.addEventListener('change', calculateScores);
+    });
 
-// 2. AI GENERATION (Supports Gemini 1.5, Gemma 3 2B, etc.)
-async function generateSmartRemarks(modelName = "gemini-1.5-flash") {
-    const btn = document.querySelector('.btn-generate');
-    const originalText = btn.innerText;
+    // Sync names for signature
+    document.getElementById('empName').addEventListener('input', syncSignatures);
+    document.getElementById('headName').addEventListener('input', syncSignatures);
 
-    // Pulls from config.js (ignored by GitHub for security)
-    const API_KEY = window.GEMINI_CONFIG?.API_KEY; 
+    // Button Listeners
+    document.getElementById('btnAI').addEventListener('click', () => validateAndRun(generateAI));
+    document.getElementById('btnPDF').addEventListener('click', () => validateAndRun(downloadPDF));
+});
+
+// --- FUNCTIONS ---
+
+function syncSignatures() {
+    document.getElementById('displayEmpName').innerText = document.getElementById('empName').value;
+    document.getElementById('displayHeadName').innerText = document.getElementById('headName').value;
+}
+
+function calculateScores() {
+    let sumA = 0;
+    document.querySelectorAll('.calc-group-a').forEach(s => sumA += parseInt(s.value));
     
-    if (!API_KEY) {
-        alert("API Key not found in config.js. Please check your setup.");
-        return;
-    }
+    const pctA = (sumA / 30) * 100;
+    document.getElementById('subtotal-a').innerText = sumA;
+    document.getElementById('status-a').innerText = pctA >= 80 ? "GOOD" : "NEEDS IMPROVEMENT";
+    // Add logic for B and Overall similar to above
+}
 
-    // Dynamic URL: Automatically adjusts based on the modelName provided
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${API_KEY}`;
+async function generateAI() {
+    const btn = document.getElementById('btnAI');
+    if (!CONFIG.API_KEY) return alert("API Key missing!");
 
     btn.innerText = "Analyzing...";
     btn.disabled = true;
 
-    const name = document.getElementById('empName').value;
-    const pos = document.getElementById('empPosition').value;
-    const total = document.getElementById('overall-score').innerText;
+    const context = {
+        name: document.getElementById('empName').value,
+        score: document.getElementById('subtotal-a').innerText
+    };
 
-    // Robust prompt for any model size
-    const promptText = `User: Analyze microfinance employee performance. 
-    Name: ${name}, Position: ${pos}, Score: ${total}/60.
-    Output ONLY JSON: {"strengths": "1 sentence", "improvements": "1 sentence", "plan": "1 sentence"}`;
+    const prompt = `Review performance for ${context.name} with score ${context.score}/30. Return JSON: {"strengths": "...", "improvements": "...", "plan": "..."}`;
 
     try {
-        const response = await fetch(API_URL, {
+        const resp = await fetch(`${CONFIG.MODEL_URL}?key=${CONFIG.API_KEY}`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                contents: [{ parts: [{ text: promptText }] }],
-                generationConfig: {
-                    temperature: 0.4, // Lower temperature for more consistent JSON structure
-                    topP: 0.8
-                }
-            })
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
         });
-        
-        const data = await response.json();
-        
-        // Error handling if the model name is incorrect or key is invalid
-        if (data.error) {
-            throw new Error(`${data.error.message} (Model: ${modelName})`);
-        }
-        
-        // Clean JSON response
-        let aiText = data.candidates[0].content.parts[0].text.replace(/```json|```/g, "").trim();
-        const result = JSON.parse(aiText);
-        
+        const data = await resp.json();
+        const result = JSON.parse(data.candidates[0].content.parts[0].text.replace(/```json|```/g, ""));
+
         document.getElementById('box-strengths').value = result.strengths;
         document.getElementById('box-improvements').value = result.improvements;
         document.getElementById('box-plan').value = result.plan;
-        
-    } catch (error) {
-        console.error("AI Generation Error:", error);
-        alert("System Error: " + error.message);
+    } catch (err) {
+        console.error(err);
+        alert("AI Failed to generate.");
     } finally {
-        btn.innerText = originalText;
+        btn.innerText = "Generate AI Remarks";
         btn.disabled = false;
     }
 }
 
-// ... (Keep downloadPDF and event listeners as they were)
+function downloadPDF() {
+    const element = document.getElementById('evaluation-content');
+    const buttons = document.getElementById('pdf-buttons');
+    buttons.style.display = 'none';
+
+    html2pdf().from(element).save().then(() => {
+        buttons.style.display = 'flex';
+    });
+}
+
+function validateAndRun(fn) {
+    const emp = document.getElementById('empName').value;
+    if (!emp) return alert("Please enter Employee Name.");
+    fn();
+}
