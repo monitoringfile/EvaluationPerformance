@@ -105,8 +105,7 @@
         <div class="section-title">
             C. OVERALL SUMMARY
             <div class="btn-group" id="pdf-buttons">
-                <button type="button" class="btn-generate" onclick="validateAndAction(generateSmartRemarks)">Generate Remarks</button>
-                <button type="button" class="btn-pdf" style="background-color: #6c757d;" onclick="clearApiKey()">Reset Key</button>
+                <button type="button" class="btn-generate" onclick="validateAndAction(() => generateSmartRemarks('gemma-3-2b'))">Generate Remarks</button>
                 <button type="button" class="btn-pdf" onclick="validateAndAction(downloadPDF)">Download PDF</button>
             </div>
         </div>
@@ -119,13 +118,13 @@
         </table>
 
         <div class="section-title">D. STRENGTHS</div>
-        <textarea id="box-strengths" style="height: 20px; width: 100%; border: 1px solid var(--border-color);"></textarea>
+        <textarea id="box-strengths" style="height: 60px; width: 100%; border: 1px solid var(--border-color);"></textarea>
 
         <div class="section-title">E. AREAS FOR IMPROVEMENT</div>
-        <textarea id="box-improvements" style="height: 20px; width: 100%; border: 1px solid var(--border-color);"></textarea>
+        <textarea id="box-improvements" style="height: 60px; width: 100%; border: 1px solid var(--border-color);"></textarea>
 
         <div class="section-title">F. ACTION PLAN</div>
-        <textarea id="box-plan" style="height: 20px; width: 100%; border: 1px solid var(--border-color);"></textarea>
+        <textarea id="box-plan" style="height: 60px; width: 100%; border: 1px solid var(--border-color);"></textarea>
 
         <div class="signature-section">
             <div class="sig-box">
@@ -140,6 +139,7 @@
     </form>
 </div>
 
+<script src="config.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
