@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weekly Performance Evaluation Form</title>
+    <link rel="icon" type="image/png" href="https://img.icons8.com/external-flatart-icons-flat-flatarticons/64/external-evaluation-business-and-teamwork-flatart-icons-flat-flatarticons.png">
     <style>
         :root {
             --primary-blue: #2c3e50;
@@ -27,14 +28,13 @@
             margin: 0 auto;
         }
 
-        /* Frame Styling */
         .frame {
             background: #fff;
             padding: 25px;
             border: 1px solid #000;
             box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.1);
             border-radius: 4px;
-            margin-bottom: 25px; /* Space between frames */
+            margin-bottom: 25px;
         }
 
         .header-section {
@@ -78,7 +78,7 @@
             font-size: 0.75em;
         }
 
-        input[type="text"], input[type="date"], select, textarea {
+        input[type="text"], input[type="date"], input[type="password"], select, textarea {
             width: 100%;
             padding: 4px;
             border: none;
@@ -89,7 +89,6 @@
             outline: none;
         }
 
-        /* Bold and Bigger Rating Numbers */
         .rating-center select {
             font-size: 14px !important;
             font-weight: bold !important;
@@ -139,8 +138,24 @@
             letter-spacing: 0.5px;
         }
 
-        .rating-center {
-            text-align: center;
+        .api-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .api-input-small {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            border-radius: 3px;
+            color: white !important;
+            font-size: 10px !important;
+            width: 150px !important;
+            padding: 2px 6px !important;
+        }
+
+        .api-input-small::placeholder {
+            color: #ccc;
         }
 
         .score-row {
@@ -292,8 +307,11 @@
 
         <div class="frame">
             <div class="section-title">
-                C. OVERALL SUMMARY
-                <button type="button" class="btn-generate" onclick="validateAndAction(generateSmartRemarks)">Analyze Results</button>
+                <span>C. OVERALL SUMMARY</span>
+                <div class="api-controls">
+                    <input type="password" id="userApiKey" class="api-input-small" placeholder="Enter API Key">
+                    <button type="button" class="btn-generate" onclick="validateAndAction(generateSmartRemarks)">Analyze Results</button>
+                </div>
             </div>
             <table>
                 <tr class="score-row" style="background-color: #d4edda !important;">
@@ -378,20 +396,28 @@
     }
 
     async function generateSmartRemarks() {
+        const apiKey = document.getElementById('userApiKey').value.trim();
+        if (!apiKey) {
+            alert("Please enter your API Key in the field next to the button.");
+            document.getElementById('userApiKey').focus();
+            return;
+        }
+
         const btn = document.querySelector('.btn-generate');
         const originalText = btn.innerText;
-        const RAW_KEY = "AIzaSyC7zbWyujCb8DgRJ01cL09ExDm9tAP8y8k"; 
-        const API_KEY = RAW_KEY.trim(); 
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
+        // Updated to Gemini 3.1 Flash Preview endpoint
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
 
-        btn.innerText = "Processing...";
+        btn.innerText = "Analyzing...";
         btn.disabled = true;
 
         const name = document.getElementById('empName').value;
         const pos = document.getElementById('empPosition').value;
         const total = document.getElementById('overall-score').innerText;
+        const status = document.getElementById('overall-status').innerText;
 
-        const promptText = `Analyze performance: ${name}, ${pos}. Score: ${total}/60. Return ONLY JSON: {"strengths": "1 sentence", "improvements": "1 sentence", "plan": "1 sentence"}`;
+        const promptText = `Analyze performance for ${name}, ${pos}. Total Score: ${total}/60. Status: ${status}. 
+        Return ONLY JSON: {"strengths": "1 short sentence", "improvements": "1 short sentence", "plan": "1 short sentence"}`;
 
         try {
             const response = await fetch(API_URL, {
@@ -401,8 +427,10 @@
             });
             const data = await response.json();
             if (data.error) throw new Error(data.error.message);
+            
             let aiText = data.candidates[0].content.parts[0].text.replace(/```json|```/g, "").trim();
             const result = JSON.parse(aiText);
+            
             document.getElementById('box-strengths').value = result.strengths;
             document.getElementById('box-improvements').value = result.improvements;
             document.getElementById('box-plan').value = result.plan;
